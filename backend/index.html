@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid/dist/umd/uuid.min.js"></script>
+    <style>
+        /* Basic styles for layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        h1 {
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #product-section {
+            display: none;
+        }
+
+        #product-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #product-list div {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+        }
+
+        .message {
+            color: #f44336;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HarvestChain</h1>
+
+        <!-- Login Section -->
+        <div id="login-section">
+            <h2>Login</h2>
+            <label for="username">Username</label>
+            <input type="text" id="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+            <button onclick="login()">Login</button>
+            <span id="login-message" class="message"></span>
+        </div>
+
+        <!-- Product Listing Section (for farmer) -->
+        <div id="product-section">
+            <h2>Welcome, <span id="user-role"></span>!</h2>
+
+            <!-- Farmer Section -->
+            <div id="farmer-section">
+                <h3>Farmer: List Your Product</h3>
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" required>
+                <label for="productPrice">Price</label>
+                <input type="number" id="productPrice" required>
+                <button onclick="listProduct()">List Product</button>
+            </div>
+
+            <!-- Buyer Section -->
+            <div id="buyer-section" style="display:none;">
+                <h3>Buyer: View Products</h3>
+                <button onclick="viewProducts()">View Products</button>
+                <div id="product-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

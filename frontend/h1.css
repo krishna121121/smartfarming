@@ -1,0 +1,117 @@
+/* General body and container styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  .container {
+    text-align: center;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .description {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  
+  /* Styling for transaction flow */
+  .transaction-flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .farmer, .buyer {
+    background-color: #f2a654;
+    padding: 10px 20px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .farmer {
+    margin-right: 50px;
+    
+  }
+  
+  .buyer {
+    margin-left: 50px;
+  }
+  
+  .blockchain {
+    position: relative;
+    width: 100px;
+    height: 140px;
+  }
+  
+  .block {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    background-color: #1e90ff;
+    border-radius: 5px;
+    animation: moveBlocks 4s infinite;
+  }
+  
+  .block-label {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #1e90ff;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .cta {
+    margin-top: 80px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cta:hover {
+    background-color: #218838;
+  }
+  
+  /* Animation for blockchain blocks */
+  @keyframes moveBlocks {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(100px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+a{
+    text-decoration: none;
+}  

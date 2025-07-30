@@ -1,0 +1,140 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(45deg, #1c1c1c, #444444, #2c3e50, #34495e);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+  
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+h2 {
+  color:white;
+  font-size: 50px;
+  font-weight: 400px;
+  text-shadow: 14px 14px 14px black;
+}
+
+#loginSection {
+  text-align: center;
+  margin-top: 100px;
+}
+
+#loginSection input {
+  padding: 10px;
+  width: 300px;
+  margin: 10px;
+}
+
+#postSection {
+  text-align: center;
+  margin-top: 50px;
+  height: 70px;
+}
+
+#postSection input,
+#postSection textarea {
+  height: 70px;
+  padding: 10px;
+  width: 90%;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 10px;
+  background-color: #D3D3D3;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+#postsList {
+  width:100vw;
+  text-align: left;
+  margin-top: 20px;
+  margin-left:72px;
+}
+
+.postItem {
+  padding: 15px;
+  background-color: #D3D3D3;
+  margin: 10px 0;
+  border-radius: 5px;
+  display: inline-block;
+  width: 90%;
+}
+
+.commentSection {
+  margin-top: 10px;
+  margin:30px;
+  
+}
+
+.commentInput {
+  padding: 10px;
+  width: 70%;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.submitCommentBtn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submitCommentBtn:hover {
+  background-color: #45a049;
+}
+
+#eer{
+  height: 40px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px black;
+
+}
+#username{
+  height: 40px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px black;
+}
