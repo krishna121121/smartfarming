@@ -3,158 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blockchain Marketplace</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uuid/dist/umd/uuid.min.js"></script>
-    <style>
-        /* Basic styles for layout */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 400px;
-        }
-
-        h1 {
-            color: #4caf50;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        label {
-            display: block;
-            text-align: left;
-            margin: 10px 0 5px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #product-section {
-            display: none;
-        }
-
-        #product-list {
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        #product-list div {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: #f9f9f9;
-        }
-
-        .message {
-            color: #f44336;
-            margin-top: 10px;
-        }
-    </style>
+    <title>Smart Farming Home</title>
+    <link rel="stylesheet" href="homekacss.css">
 </head>
 <body>
-
-<div class="container">
-    <h1>HarvestChain</h1>
-
-    <!-- Login Section -->
-    <div id="login-section">
-        <h2>Login</h2>
-        <label for="username">Username</label>
-        <input type="text" id="username" required>
-        <label for="password">Password</label>
-        <input type="password" id="password" required>
-        <button onclick="login()">Login</button>
-        <span id="login-message" class="message"></span>
-        <p>Don't have an account? <span onclick="switchToSignUp()">Create one</span></p>
-    </div>
-
-    <!-- Signup Form -->
-    <div class="form-container hidden" id="signup-form">
-        <h2>Create Account</h2>
-        <input type="email" id="signup-email" placeholder="Email" required>
-        <input type="password" id="signup-password" placeholder="Password" required>
-        <input type="password" id="confirm-password" placeholder="Confirm Password" required>
-
-        <!-- Role Selection as Dropdown -->
-        <label for="role">Select Your Role:</label>
-        <select id="role" required>
-            <option value="" disabled selected>Select your role</option>
-            <option value="farmer">Farmer</option>
-            <option value="buyer">Buyer</option>
-        </select>
-
-        <button onclick="Create()">Create</button>
-        <p>Already have an account? <span onclick="switchToLogin()">Login</span></p>
-    </div>
-
-
-    <!-- Product Listing Section (for farmer) -->
-    <div id="product-section">
-        <h2>Welcome, <span id="user-role"></span>!</h2>
-        <!-- Logout Button -->
-        <button id="logout-btn" onclick="logout()">Logout</button>
-        <!-- Farmer Section -->
-        <div id="farmer-section">
-            <h3>Farmer: List Your Product</h3>
-            <label for="productName">Product Name</label>
-            <input type="text" id="productName" required>
-            <label for="productPrice">Price</label>
-            <input type="number" id="productPrice" required>
-            <button onclick="listProduct()">List Product</button>
+<!-- Navigation Bar -->
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Smart Farming Logo">
+            <h1>Smart Farming</h1>
         </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="#services-details">Services</a></li>
+                <li><a href="./index.html">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-        <!-- Buyer Section -->
-        <div id="buyer-section" style="display:none;">
-            <h3>Buyer: View Products</h3>
-            <button onclick="viewProducts()">View Products</button>
-            <div id="product-list"></div>
+<!-- Hero Section with Sliding Images -->
+<div class="hero-slider">
+    <div class="slide active" style="background-image: url('image1.jpg');"></div>
+    <div class="slide" style="background-image: url('image2.jpg');"></div>
+    <div class="slide" style="background-image: url('image3.jpg');"></div>
+    <div class="hero-overlay">
+        <h2>HarvestChain:</h2>
+        <p>"Revolutionizing agriculture with smart contracts"</p>
+        <div class="hero-buttons">
+            <button ><a href=".\chatbot\public\kkk.html" style="text-decoration: none; color: inherit;">AI Advice</a></button>
+            <button onclick="window.location.href='index.html'">Buy & Sell</button>
+            <button > <a href=".\hh\a.html" style="text-decoration: none; color: inherit;">Community Post</a></button>
         </div>
     </div>
 </div>
+<section id="why-smart-farming">
+    <h2>Why HarvestChain</h2>
+    <p>
+        HarvestChain is your gateway to a more transparent, fair, and efficient agricultural marketplace. Powered by blockchain and smart contracts, we offer farmers a decentralized platform that eliminates intermediaries and ensures fair compensation. Our solution is designed to maximize profits, enhance transparency, and empower farmers with the tools they need to succeed. Here’s why HarvestChain is the future of farming:
+    </p>
+    <div class="features-container">
+        <div class="feature">
+            <img src="increased-yields-icon.png" alt="Increased Yields Icon">
+            <h3>Increased Yields</h3>
+            <p>
+                HarvestChain uses AI-driven tools to provide precise planting and harvesting advice, optimizing your crop cycle and helping you achieve higher yields.            </p>
+        </div>
+        <div class="feature">
+            <img src="cost-savings-icon.png" alt="Cost Savings Icon">
+            <h3>Cost Savings</h3>
+            <p>
+                Optimize resources like water, fertilizers, and labor to reduce unnecessary expenses, making your farm more sustainable and increasing overall profitability.
 
-<script src="app.js"></script>
+            </p>
+        </div>
+        <div class="feature">
+            <img src="smart-decisions-icon.png" alt="Smart Decisions Icon">
+            <h3>Smart Decisions</h3>
+            <p>
+                Get real-time insights on pest control, irrigation, and more. HarvestChain empowers you to make informed, data-driven decisions for better farming results.
+
+            </p>
+        </div>
+        <div class="feature">
+            <img src="time-efficiency-icon.png" alt="Time Efficiency Icon">
+            <h3>Time Efficiency</h3>
+            <p>
+                Automate tasks and streamline processes with HarvestChain, saving valuable time and energy to focus on what matters—growing your crops and scaling your farm.
+
+            </p>
+        </div>
+    </div>
+</section>
+<section id="services-details">
+    <h2>Our Services</h2>
+    <div class="services-container">
+        <div class="service">
+            <div class="service-text">
+                <h3>Buy on HarvestChain</h3>
+                <p>
+                    Purchase fresh, high-quality produce directly from farmers on HarvestChain. Our decentralized platform ensures secure, transparent transactions, cutting out middlemen. Blockchain guarantees that every payment is processed with trust, and buyers can confidently access the produce they need, knowing they’re supporting fair trade.                </p>
+                <a href="./h1.html" class="download-button">Learn More</a>
+            </div>
+            <div class="service-image">
+                <img src="./OIP.jpeg" alt="Crop Monitoring">
+            </div>
+        </div>
+        <div class="service">
+            <div class="service-text">
+                <h3>Sell on HarvestChain</h3>
+                <p>
+                    Sell your produce directly to buyers on HarvestChain, bypassing intermediaries and ensuring fair compensation. With blockchain technology, each transaction is secure, transparent, and traceable. Easily list your products, set prices, and manage sales in a decentralized marketplace that guarantees you a fair deal every time.                </p>
+                <a href="./h2.html" class="download-button">Learn More</a>
+            </div>
+            <div class="service-image">
+                <img src="post.webp" alt="Soil Testing">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<<section id="about-us">
+    <div class="about-container">
+        <div class="about-heading">
+            <h2>About Us</h2>
+        </div>
+        <div class="about-content">
+            <p>
+                At Smart Farming, we're passionate about transforming agriculture through innovation. As a consortium of forward-thinking companies, we're on a mission to harness the full potential of AI and cutting-edge technologies, making farming more efficient, sustainable, and profitable for farmers worldwide. Our collaborative spirit drives us to pioneer solutions that empower growers, optimize crop management, and revolutionize the future of agriculture.
+            </p>
+            <a href="#" class="cta-button">Work with Us</a>
+        </div>
+    </div>
+</section>
+
+<section id="faq">
+    <h2>FAQ</h2>
+    <h3>What is Smart Farming?</h3>
+    <p>Smart Farming leverages IoT, blockchain, and AI for efficient, sustainable, and productive agriculture.</p>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- LinkedIn Accounts Section -->
+        <div class="footer-section linked-in">
+            <h3>Our Team</h3>
+            <div class="linkedin-container">
+                <!-- First Row - 3 Profiles -->
+                <div class="linkedin-profile">
+                    <a href="https://www.linkedin.com/in/jayant-singh-rawat-81563a295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
+                        <img src="jayantphoto.jpg" alt="LinkedIn Profile 1" class="linkedin-photo">
+                        <p>Jayant Singh Rawat</p>
+                    </a>
+                </div>
+                <div class="linkedin-profile">
+                    <a href="https://www.linkedin.com/in/krishna-jha-92823b20a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                        <img src="krishna123.jpg" alt="LinkedIn Profile 2" class="linkedin-photo">
+                        <p>Krishna Madhav Jha</p>
+                    </a>
+                </div>
+                <div class="linkedin-profile">
+                    <a href="https://www.linkedin.com/in/bhargav-mane-5048342a1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                        <img src="bhargav.jpg" alt="LinkedIn Profile 3" class="linkedin-photo">
+                        <p>Bhargav Mane</p>
+                    </a>
+                </div>
+
+                <!-- Second Row - 2 Profiles -->
+                <div class="linkedin-profile">
+                    <a href="https://www.linkedin.com/in/brajesh-mohanty-12a204258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                        <img src="brajesh.jpg" alt="LinkedIn Profile 4" class="linkedin-photo">
+                        <p>Brajesh Mohanty</p>
+                    </a>
+                </div>
+                <div class="linkedin-profile">
+                    <a href="https://www.linkedin.com/in/prakharpande?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                        <img src="prakhar.jpg" alt="LinkedIn Profile 5" class="linkedin-photo">
+                        <p>Prakhar Pande</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    
+   
+</footer>
+
+
+
+    
+
+<script>
+    // Image Slider Script
+    let currentIndex = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function showNextSlide() {
+        slides[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add("active");
+    }
+
+    // Automatically switch slides every 5 seconds
+    setInterval(showNextSlide, 5000);
+</script>
 </body>
 </html>
