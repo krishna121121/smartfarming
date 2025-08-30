@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmer's Market</title>
     <style>
-        /* Existing CSS for login/signup/welcome */
+        /* Existing CSS for login/signup */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -15,9 +15,8 @@
             height: 100vh;
             margin: 0;
         }
-
         .container {
-            width: 90%; /* Increased width for new content */
+            width: 90%;
             max-width: 800px;
             background-color: #fff;
             padding: 20px;
@@ -25,27 +24,22 @@
             border-radius: 8px;
             text-align: center;
         }
-
-        .form-section, .welcome-section, .market-section {
+        .form-section, .role-selection-section, .market-section {
             display: none;
         }
-
-        .form-section.active, .welcome-section.active, .market-section.active {
+        .form-section.active, .role-selection-section.active, .market-section.active {
             display: block;
         }
-
         h2 {
             margin-bottom: 20px;
             color: #333;
         }
-
         label {
             display: block;
             margin-bottom: 5px;
             text-align: left;
             color: #555;
         }
-
         input[type="text"],
         input[type="password"],
         input[type="email"],
@@ -58,7 +52,6 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-
         button {
             width: 100%;
             padding: 10px;
@@ -68,45 +61,48 @@
             background-color: #007bff;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px;
         }
-
         button:hover {
             background-color: #0056b3;
         }
-
         .link {
             margin-top: 15px;
             color: #007bff;
             cursor: pointer;
         }
-
-        .welcome-section h2, .market-section h2 {
+        .market-section h2, .role-selection-section h2 {
             color: #28a745;
         }
-
+        /* New CSS for the role selection buttons */
+        .role-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .role-buttons button {
+            width: 45%;
+        }
         /* New CSS for the market section */
         .market-content {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 1fr;
             gap: 20px;
             margin-top: 20px;
             text-align: left;
         }
-
         .sell-form-container, .products-list-container {
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 8px;
         }
-        
         .sell-form-container {
             background-color: #f9f9f9;
         }
-
         .products-list-container {
             background-color: #fff;
         }
-
         .product-card {
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -114,25 +110,23 @@
             margin-bottom: 15px;
             background-color: #f1f8e9;
         }
-
         .product-card h3 {
             margin-top: 0;
         }
-
         .product-card p {
             margin: 5px 0;
         }
-
         .buy-button {
             background-color: #28a745;
             padding: 8px 15px;
-            margin-top: 10px;
             width: auto;
         }
-        
         .buy-button:hover {
             background-color: #218838;
         }
+        /* Hide/Show logic for different views */
+        .market-section.farmer-view .products-list-container { display: none; }
+        .market-section.buyer-view .sell-form-container { display: none; }
     </style>
 </head>
 <body>
@@ -140,7 +134,7 @@
 <div class="container">
     <div id="login-form" class="form-section active">
         <h2>Login</h2>
-        <form onsubmit="event.preventDefault(); showMarketPage();">
+        <form onsubmit="event.preventDefault(); showRoleSelection();">
             <label for="login-username">Username:</label>
             <input type="text" id="login-username" name="login-username" required>
             <label for="login-password">Password:</label>
@@ -152,7 +146,7 @@
 
     <div id="signup-form" class="form-section">
         <h2>Sign Up</h2>
-        <form onsubmit="event.preventDefault(); showMarketPage();">
+        <form onsubmit="event.preventDefault(); showRoleSelection();">
             <label for="signup-username">Username:</label>
             <input type="text" id="signup-username" name="signup-username" required>
             <label for="signup-email">Email:</label>
@@ -164,8 +158,17 @@
         <p>Already have an account? <span class="link" onclick="showSection('login-form')">Login</span></p>
     </div>
 
+    <div id="role-selection" class="role-selection-section">
+        <h2>Choose Your Role</h2>
+        <p>Are you a Farmer or a Buyer?</p>
+        <div class="role-buttons">
+            <button onclick="setRoleAndShowMarket('farmer')">I am a Farmer</button>
+            <button onclick="setRoleAndShowMarket('buyer')">I am a Buyer</button>
+        </div>
+    </div>
+
     <div id="market-page" class="market-section">
-        <h2>Welcome to the Farmer's Market!</h2>
+        <h2 id="market-welcome-message"></h2>
         <div class="market-content">
             <div class="sell-form-container">
                 <h3>Sell Your Produce</h3>
@@ -174,6 +177,8 @@
                     <input type="text" id="product-name" required>
                     <label for="product-price">Price (per kg):</label>
                     <input type="number" id="product-price" step="0.01" required>
+                    <label for="product-quantity">Quantity (kg):</label>
+                    <input type="number" id="product-quantity" required>
                     <label for="product-description">Description:</label>
                     <textarea id="product-description" rows="4" required></textarea>
                     <button type="submit">List Product</button>
@@ -183,11 +188,12 @@
             <div class="products-list-container">
                 <h3>Available Products</h3>
                 <div id="products-list">
-                    <div class="product-card">
+                    <div class="product-card" data-quantity="5">
                         <h3>Organic Apples</h3>
                         <p><strong>Price:</strong> $2.50 / kg</p>
+                        <p><strong>Available:</strong> <span class="quantity">5</span> kg</p>
                         <p><strong>Description:</strong> Freshly picked from our orchard. Sweet and crisp.</p>
-                        <button class="buy-button">Buy Now</button>
+                        <button class="buy-button" onclick="buyProduct(this)">Buy Now</button>
                     </div>
                 </div>
             </div>
@@ -197,37 +203,91 @@
 </div>
 
 <script>
-    // --- Existing JavaScript functions ---
+    // In a real application, products would be loaded from a database.
+    let products = [
+        { name: 'Organic Apples', price: 2.50, quantity: 5, description: 'Freshly picked from our orchard. Sweet and crisp.' }
+    ];
+
     function showSection(sectionId) {
-        document.querySelectorAll('.form-section, .market-section').forEach(section => {
+        document.querySelectorAll('.form-section, .role-selection-section, .market-section').forEach(section => {
             section.classList.remove('active');
         });
         document.getElementById(sectionId).classList.add('active');
     }
 
-    // --- New JavaScript functions for the market page ---
-    function showMarketPage() {
+    function showRoleSelection() {
+        showSection('role-selection');
+    }
+
+    function setRoleAndShowMarket(role) {
+        const marketPage = document.getElementById('market-page');
+        marketPage.classList.remove('farmer-view', 'buyer-view');
+        marketPage.classList.add(`${role}-view`);
+        document.getElementById('market-welcome-message').textContent = `Welcome, ${role.charAt(0).toUpperCase() + role.slice(1)}!`;
+        renderProducts(); // Render products when the page loads
         showSection('market-page');
+    }
+
+    function renderProducts() {
+        const productsList = document.getElementById('products-list');
+        productsList.innerHTML = ''; // Clear the list
+        products.forEach(product => {
+            if (product.quantity > 0) { // Only show products that are in stock
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p><strong>Price:</strong> $${product.price.toFixed(2)} / kg</p>
+                    <p><strong>Available:</strong> <span class="quantity">${product.quantity}</span> kg</p>
+                    <p><strong>Description:</strong> ${product.description}</p>
+                    <button class="buy-button" onclick="buyProduct(this, '${product.name}')">Buy Now</button>
+                `;
+                productsList.appendChild(productCard);
+            }
+        });
     }
 
     function addProduct() {
         const productName = document.getElementById('product-name').value;
-        const productPrice = document.getElementById('product-price').value;
+        const productPrice = parseFloat(document.getElementById('product-price').value);
+        const productQuantity = parseInt(document.getElementById('product-quantity').value);
         const productDesc = document.getElementById('product-description').value;
-        const productsList = document.getElementById('products-list');
 
-        const newProductCard = document.createElement('div');
-        newProductCard.classList.add('product-card');
-        newProductCard.innerHTML = `
-            <h3>${productName}</h3>
-            <p><strong>Price:</strong> $${productPrice} / kg</p>
-            <p><strong>Description:</strong> ${productDesc}</p>
-            <button class="buy-button">Buy Now</button>
-        `;
-        productsList.appendChild(newProductCard);
+        // Add the new product to our local array (simulating a database)
+        products.push({
+            name: productName,
+            price: productPrice,
+            quantity: productQuantity,
+            description: productDesc
+        });
 
-        // Clear the form fields after adding the product
+        // Clear the form fields and re-render the list
         document.getElementById('sell-form').reset();
+        renderProducts();
+    }
+
+    function buyProduct(button, productName) {
+        const productCard = button.closest('.product-card');
+        const quantitySpan = productCard.querySelector('.quantity');
+        let currentQuantity = parseInt(quantitySpan.textContent);
+
+        if (currentQuantity > 0) {
+            currentQuantity--;
+            quantitySpan.textContent = currentQuantity;
+            
+            // Update the quantity in our local data store
+            const productToUpdate = products.find(p => p.name === productName);
+            if (productToUpdate) {
+                productToUpdate.quantity = currentQuantity;
+            }
+
+            if (currentQuantity === 0) {
+                // If quantity is zero, remove the card after a short delay
+                setTimeout(() => {
+                    productCard.remove();
+                }, 500);
+            }
+        }
     }
 </script>
 
